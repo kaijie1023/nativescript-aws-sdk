@@ -11,8 +11,7 @@ import {
     StatusCode,
     UploadEventData
 } from './s3-common';
-import * as utils from 'tns-core-modules/utils/utils';
-import * as fs from 'tns-core-modules/file-system';
+import * as fs from '@nativescript/core/file-system';
 
 const main_queue = dispatch_get_current_queue();
 
@@ -58,7 +57,7 @@ export class S3 extends S3Base {
             default:
                 throw new Error('Invalid S3AuthType');
         }
-        const manager = utils.ios.getter(AWSServiceManager, AWSServiceManager.defaultServiceManager);
+        const manager = AWSServiceManager || AWSServiceManager.defaultServiceManager;
         config = AWSServiceConfiguration.alloc().initWithRegionEndpointCredentialsProvider(S3.getRegion(options.region), endPoint, credentialsProvider);
         config.maxRetryCount = 5;
         config.timeoutIntervalForRequest = 30;
@@ -131,7 +130,7 @@ export class S3 extends S3Base {
     }
 
     public createUpload(options: S3UploadOptions): number {
-        const transferUtility = utils.ios.getter(AWSS3TransferUtility, AWSS3TransferUtility.defaultS3TransferUtility);
+        const transferUtility = AWSS3TransferUtility || AWSS3TransferUtility.defaultS3TransferUtility;
         const appRoot = fs.knownFolders.currentApp().path;
         let file;
         if (options.file && options.file.startsWith('~/')) {
@@ -232,7 +231,7 @@ export class S3 extends S3Base {
             }
             return null;
         });
-        const manager = utils.ios.getter(AWSServiceManager, AWSServiceManager.defaultServiceManager);
+        const manager = AWSServiceManager || AWSServiceManager.defaultServiceManager;
         S3.OperationsData.set(id, {
             status: StatusCode.PENDING,
             path: file.path,
@@ -246,7 +245,7 @@ export class S3 extends S3Base {
     }
 
     public createDownload(options: S3DownloadOptions): number {
-        const transferUtility = utils.ios.getter(AWSS3TransferUtility, AWSS3TransferUtility.defaultS3TransferUtility);
+        const transferUtility = AWSS3TransferUtility || AWSS3TransferUtility.defaultS3TransferUtility;
         const appRoot = fs.knownFolders.currentApp().path;
 
         let file;
