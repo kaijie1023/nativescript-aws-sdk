@@ -4,7 +4,7 @@ exports.S3 = void 0;
 var s3_common_1 = require("./s3-common");
 var fs = require("@nativescript/core/file-system");
 var main_queue = dispatch_get_current_queue();
-var S3 = (function (_super) {
+var S3 = exports.S3 = (function (_super) {
     __extends(S3, _super);
     function S3() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -368,5 +368,4 @@ var S3 = (function (_super) {
     S3.OperationsData = new Map();
     return S3;
 }(s3_common_1.S3Base));
-exports.S3 = S3;
 //# sourceMappingURL=s3.ios.js.map

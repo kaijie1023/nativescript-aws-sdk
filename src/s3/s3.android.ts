@@ -10,7 +10,7 @@ import {
     StatusCode,
     UploadEventData
 } from './s3-common';
-import * as utils from '@nativescript/core/utils/utils';
+import * as utils from '@nativescript/core/utils';
 import * as fs from '@nativescript/core/file-system';
 
 declare const com;
